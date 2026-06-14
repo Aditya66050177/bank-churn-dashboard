@@ -114,6 +114,9 @@ def load_data():
         bins=[0, 30, 40, 50, 60, 100],
         labels=['<30', '30-40', '40-50', '50-60', '60+']
     )
+    # Calculate Customer Lifetime Value (CLV)
+    # CLV = (Balance * 3% net interest margin) * Tenure (years)
+    df['CLV'] = (df['Balance'] * 0.03) * df['Tenure']
     return df, df_raw
 
 df, df_raw = load_data()
@@ -205,8 +208,9 @@ with tab1:
     if len(filtered_df) == 0:
         st.warning("No data matches the selected filters. Please adjust the sidebar controls.")
     else:
-        # KPIs Row
-        c1, c2, c3, c4 = st.columns(4)
+        # KPIs Grid (2 Rows x 3 Columns)
+        row1_col1, row1_col2, row1_col3 = st.columns(3)
+        row2_col1, row2_col2, row2_col3 = st.columns(3)
         
         total_customers = len(filtered_df)
         churn_count = len(filtered_df[filtered_df['Exited'] == 1])
@@ -214,7 +218,15 @@ with tab1:
         revenue_at_risk = filtered_df[filtered_df['Exited'] == 1]['Balance'].sum()
         avg_credit_score = filtered_df['CreditScore'].mean()
         
-        with c1:
+        # Calculate CLV metrics
+        retained_segment = filtered_df[filtered_df['Exited'] == 0]
+        churned_segment = filtered_df[filtered_df['Exited'] == 1]
+        
+        avg_clv_retained = retained_segment['CLV'].mean() if len(retained_segment) > 0 else 0
+        total_clv_lost = churned_segment['CLV'].sum()
+        
+        # Row 1: Segment Health Overview
+        with row1_col1:
             st.markdown(f"""
             <div class="metric-container">
                 <div class="metric-label">Total Customers</div>
@@ -223,7 +235,7 @@ with tab1:
             </div>
             """, unsafe_allow_html=True)
             
-        with c2:
+        with row1_col2:
             st.markdown(f"""
             <div class="metric-container">
                 <div class="metric-label">Churn Rate</div>
@@ -232,7 +244,17 @@ with tab1:
             </div>
             """, unsafe_allow_html=True)
             
-        with c3:
+        with row1_col3:
+            st.markdown(f"""
+            <div class="metric-container">
+                <div class="metric-label">Avg Credit Score</div>
+                <div class="metric-val">{avg_credit_score:.0f}</div>
+                <div class="metric-sub">Customer financial health</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        # Row 2: Financial Impact Metrics
+        with row2_col1:
             st.markdown(f"""
             <div class="metric-container">
                 <div class="metric-label">Revenue at Risk</div>
@@ -241,12 +263,21 @@ with tab1:
             </div>
             """, unsafe_allow_html=True)
             
-        with c4:
+        with row2_col2:
             st.markdown(f"""
             <div class="metric-container">
-                <div class="metric-label">Avg Credit Score</div>
-                <div class="metric-val">{avg_credit_score:.0f}</div>
-                <div class="metric-sub">Customer financial health</div>
+                <div class="metric-label">Avg CLV (Retained)</div>
+                <div class="metric-val" style="color: #00b4d8;">${avg_clv_retained:,.0f}</div>
+                <div class="metric-sub">Avg Lifetime Value of active base</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        with row2_col3:
+            st.markdown(f"""
+            <div class="metric-container">
+                <div class="metric-label">Total CLV Lost</div>
+                <div class="metric-val" style="color: #f25c54;">${total_clv_lost:,.0f}</div>
+                <div class="metric-sub">Lifetime Value lost to churn</div>
             </div>
             """, unsafe_allow_html=True)
             
