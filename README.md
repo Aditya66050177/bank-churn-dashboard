@@ -1,10 +1,10 @@
-# 🏦 Bank Customer Churn Analysis & Prediction
+#  Bank Customer Churn Analysis & Prediction
 
 A professional end-to-end data analytics and predictive modeling portfolio project. This repository contains a Jupyter Notebook for Exploratory Data Analysis (EDA) and a premium interactive Streamlit Dashboard with an on-the-fly trained Random Forest Classifier to predict individual customer churn risk.
 
 ---
 
-## 🗂️ Project Structure
+# Project Structure
 
 ```text
 churn-analysis/
@@ -23,7 +23,7 @@ churn-analysis/
 
 ---
 
-## 🚀 Quick Start & Installation
+# Quick Start & Installation
 
 To run this project on a 64-bit Windows environment, a local 64-bit Python setup script has been provided to automatically configure a portable Python runtime and download all required packages (including heavy libraries like `pyarrow` and `scikit-learn`) without altering your global Python configuration.
 
@@ -41,7 +41,7 @@ Launch the dashboard using the local 64-bit Python interpreter:
 
 ---
 
-## 🔍 Exploratory Data Analysis (EDA)
+# Exploratory Data Analysis (EDA)
 The analysis notebook (`notebooks/analysis.ipynb`) investigates the core driver patterns behind bank churn. The main findings include:
 1. **Age Bracket Risk:** Customers aged 40-60 represent the highest churn risk, with churn rates exceeding **40%**.
 2. **Engagement Decay:** Inactive members churn at double the rate of active members (**26.8% vs 14.2%**).
@@ -50,7 +50,7 @@ The analysis notebook (`notebooks/analysis.ipynb`) investigates the core driver 
 
 ---
 
-## 📊 Streamlit Dashboard Features
+# Streamlit Dashboard Features
 
 The custom dashboard in `app.py` features:
 * **Interactive Filtering:** Sift data by Geography, Gender, Age Range, and Account Balance from the sidebar.
@@ -61,7 +61,7 @@ The custom dashboard in `app.py` features:
 
 ---
 
-## 📋 Actionable Business Strategies
+# Actionable Business Strategies
 
 Based on analytics insights, the recommended retention campaigns are:
 1. **Targeted VIP Support for 40-60 Group:** Establish customized retirement and wealth planning packages, coupled with prioritized support.
