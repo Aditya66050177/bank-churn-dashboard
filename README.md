@@ -1,70 +1,109 @@
-#  Bank Customer Churn Analysis & Prediction
-
-A professional end-to-end data analytics and predictive modeling portfolio project. This repository contains a Jupyter Notebook for Exploratory Data Analysis (EDA) and a premium interactive Streamlit Dashboard with an on-the-fly trained Random Forest Classifier to predict individual customer churn risk.
-
+# Bank Customer Churn Analysis Dashboard
+ 
+A Business Analyst & APM portfolio project analyzing customer churn patterns in retail banking — combining data analysis, ML-based risk prediction, and actionable business recommendations.
+ 
+**Live App:** [bank-churn-dashboard.streamlit.app](https://bank-churn-dashboard-sgwst7xgjvzd84y7jkazc4.streamlit.app/)
+ 
 ---
-
-# Project Structure
-
-```text
-churn-analysis/
+ 
+## Business Problem
+ 
+A retail bank is experiencing a **20.4% customer churn rate**, resulting in significant revenue loss through lost balances and reduced lifetime value. This project identifies *who* is churning, *why* they are churning, and *what the business should do* about it.
+ 
+---
+ 
+## Project Objectives
+ 
+- Quantify churn rate and revenue impact across customer segments
+- Identify high-risk cohorts by geography, age, product usage, and engagement
+- Build a real-time churn risk calculator to flag individual at-risk customers
+- Translate findings into actionable business recommendations
+---
+ 
+## Dashboard Structure
+ 
+### Tab 1 — Executive Insights
+High-level KPIs for leadership and stakeholders:
+| Metric | Description |
+|---|---|
+| Total Customers | Count of customers in selected segment |
+| Churn Rate (%) | % of customers who have left the bank |
+| Revenue at Risk ($) | Total balance lost to churned customers |
+| Avg Credit Score | Financial health indicator of the segment |
+ 
+### Tab 2 — Segment Matrix
+Deep-dive cohort analysis across demographics:
+- Active vs. Inactive member churn comparison
+- Segment breakdown by Geography × Gender
+- Avg Balance, Avg Credit Score, and Churn Rate per cohort
+### Tab 3 — Churn Risk Calculator
+On-the-fly ML prediction using a **Random Forest model**:
+- Input any customer profile and get an instant churn probability
+- Risk categorization: Low (<30%) | Medium (30–60%) | High (>60%)
+---
+ 
+## Key Findings
+ 
+- **Germany** has the highest churn rate (~32%) vs France and Spain (~16%)
+- **Age group 40–60** churns significantly more than younger customers
+- **Inactive members** are 2× more likely to churn than active ones
+- Customers with **3–4 products** show unexpectedly high churn — suggesting product-fit issues
+- High-balance customers represent disproportionate **revenue at risk**
+---
+ 
+## Business Recommendations
+ 
+1. **Targeted retention campaigns** for the 40–60 age group with personalized offers
+2. **Re-engagement program** for inactive members — triggered email/SMS within 30 days of inactivity
+3. **Germany market review** — investigate local competitive landscape and pricing
+4. **Product bundling audit** — review why multi-product customers churn more; assess onboarding quality
+---
+ 
+## Tech Stack
+ 
+| Tool | Purpose |
+|---|---|
+| Python | Data analysis and ML modeling |
+| Pandas | Data manipulation |
+| Plotly | Interactive visualizations |
+| Scikit-learn | Random Forest churn prediction model |
+| Streamlit | Dashboard deployment |
+ 
+---
+ 
+## Project Structure
+ 
+```
+bank-churn-dashboard/
 │
-├── .python64/          ← Local 64-bit Python environment (redirection via D: junction)
 ├── data/
-│   ├── bank_churn.csv                 ← Main customer dataset (10,000 records)
-│   └── bank_churn_data_dictionary.csv  ← Metadata descriptions
-├── notebooks/
-│   └── analysis.ipynb  ← Exploratory Data Analysis (EDA) Jupyter Notebook
-├── app.py              ← Premium Streamlit dashboard & Churn Calculator
-├── setup_env.ps1       ← Environment setup script for 64-bit Windows environments
-├── requirements.txt    ← Python package dependencies
-└── README.md           ← Project Documentation
+│   └── bank_churn.csv          # Source dataset (Maven Analytics)
+├── app.py                       # Main Streamlit dashboard
+├── requirements.txt             # Python dependencies
+└── README.md
 ```
-
+ 
 ---
-
-# Quick Start & Installation
-
-To run this project on a 64-bit Windows environment, a local 64-bit Python setup script has been provided to automatically configure a portable Python runtime and download all required packages (including heavy libraries like `pyarrow` and `scikit-learn`) without altering your global Python configuration.
-
-### 1. Install Dependencies
-Run the PowerShell setup script to initialize the 64-bit runtime:
-```powershell
-powershell -ExecutionPolicy Bypass -File setup_env.ps1
-```
-
-### 2. Run the Streamlit Dashboard
-Launch the dashboard using the local 64-bit Python interpreter:
-```powershell
-.python64\Scripts\streamlit.exe run app.py
-```
-
+ 
+## BA/APM Documentation
+ 
+This project is supported by full business documentation:
+ 
+- **BRD (Business Requirements Document)** — stakeholder requirements, AS-IS/TO-BE process, functional requirements
+- **PRD (Product Requirements Document)** — feature specs, user stories, success metrics
+*(Available on request)*
+ 
 ---
-
-# Exploratory Data Analysis (EDA)
-The analysis notebook (`notebooks/analysis.ipynb`) investigates the core driver patterns behind bank churn. The main findings include:
-1. **Age Bracket Risk:** Customers aged 40-60 represent the highest churn risk, with churn rates exceeding **40%**.
-2. **Engagement Decay:** Inactive members churn at double the rate of active members (**26.8% vs 14.2%**).
-3. **Geographic Risk:** German clients exit at twice the rate of French or Spanish clients (**32.4% vs ~16%**).
-4. **Product Clashing:** Customers possessing 3 or 4 products experience a sudden surge in churn (**>80%**), indicating product mismatch or pricing friction.
-
+ 
+## Dataset
+ 
+- **Source:** [Maven Analytics — Bank Customer Churn](https://mavenanalytics.io/data-playground/bank-customer-churn)
+- **Size:** 10,000 customers
+- **Features:** Credit Score, Geography, Age, Tenure, Balance, NumOfProducts, IsActiveMember, EstimatedSalary, Exited
 ---
-
-# Streamlit Dashboard Features
-
-The custom dashboard in `app.py` features:
-* **Interactive Filtering:** Sift data by Geography, Gender, Age Range, and Account Balance from the sidebar.
-* **Executive Metrics:** View real-time Total Customers, Segment Churn Rate, Revenue at Risk, and Credit Score health.
-* **Modern Visualization:** Fully interactive dark-theme charts powered by Plotly (Geo bar chart, Age bracket distributions, Product breakdowns, and Retained vs Churned Box plots).
-* **Predictive Customer Sandbox:** Input customized profile parameters (Age, Credit Score, Balance, etc.) to get a real-time risk score calculated via a Random Forest model.
-* **Data Exporter:** Generate and download a list of high-risk customers (`ChurnProbability >= 50%`) as a CSV for outreach.
-
----
-
-# Actionable Business Strategies
-
-Based on analytics insights, the recommended retention campaigns are:
-1. **Targeted VIP Support for 40-60 Group:** Establish customized retirement and wealth planning packages, coupled with prioritized support.
-2. **Re-engagement Offers:** Implement automated trigger emails for inactive members offering transaction fee relief or cashback rewards.
-3. **Regional Germany Auditing:** Review German market banking regulations and evaluate local competitors to counter market share erosion.
-4. **Product Package Restructuring:** Audit and restructure multi-product bundles to replace standalone product fees with integrated bundle rates.
+ 
+## Author
+ 
+**Aditya** — 3rd Year CSE Student | Aspiring APM & Business Analyst
+- [GitHub](https://github.com/Aditya66050177)
+- [LinkedIn](https://www.linkedin.com/in/aditya54/)
